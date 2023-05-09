@@ -1,16 +1,22 @@
-// import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import ListGroup from "./components/ListGroup";
 
 function App() {
-    const navItems = [
-        'Manage Employee',
-        'Manage Shifts',
-        'View DTRs'
-      ];
-    const handleNavClicks = (item: string) => {
+    const [currentView, setCurrentView] = useState('');
+ 
+
+    function updateView(item : string) {
+        setCurrentView(item);
         switch(item) {
             case "Manage Employee" : console.log("Load Manage Employee Pane");
+                fetch('', {
+
+                }).then(
+                    response => response.json()
+                ).then(data => {
+
+                });
                 break;
             case "Manage Shifts" : console.log("Load Manage Shifts Pane");
                 break;
@@ -20,13 +26,20 @@ function App() {
                 break;
         }
     }
+
+    const navItems = [
+        'Manage Employee',
+        'Manage Shifts',
+        'View DTRs'
+      ];
     // const navLinks =
 
     return <div className="container-fluid">
                 <div className="row">
                     <nav id="sideNav" className="col-md-3 col-lg-2 d-md-block sidebar collapse">
                         <div className="position-sticky pt-3 sidbar-sticky">
-                            <ListGroup items={navItems} heading="" onClickItem={handleNavClicks} />
+                            <img src="https://www.homesourced.com/wp-content/uploads/2021/02/logo.png" alt="Company Logo" className="pt-3 pb-3"/>
+                            <ListGroup items={navItems} heading="" onClickItem={updateView} />
                         </div>
                     </nav>
                     <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -42,6 +55,9 @@ function App() {
                                     This week
                                 </button>
                             </div>
+                        </div>
+                        <div className="bg-secondary">
+                            <span id="testArea"></span>
                         </div>
                     </main>
                 </div>
